@@ -1,69 +1,85 @@
 <script>
   import {onMount} from 'svelte';
-  let count = 0;
-  onMount(() => {
-    const interval = setInterval(() => count++, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  });
+  import Question from './Question.svelte';
+  const types = { 
+    e: 0, i: 0, 
+    s: 0, n: 0,
+    t: 0, f: 0,
+    j: 0, p: 0
+  }
 </script>
 
 <style>
-  :global(body) {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  .App {
-    text-align: center;
-  }
-  .App code {
-    background: #0002;
-    padding: 4px 8px;
-    border-radius: 4px;
-  }
-  .App p {
-    margin: 0.4rem;
+
+  .scroll {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+
+    scroll-behavior: smooth;
   }
 
-  .App-header {
-    background-color: #f9f6f6;
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
+  .scroll > section {
+    height: 100vh;
+    scroll-snap-align: start;
+    color: white;
   }
-  .App-link {
-    color: #ff3e00;
+
+  article.hidden {
+    
+    height: initial;
   }
-  .App-logo {
-    height: 36vmin;
-    pointer-events: none;
-    margin-bottom: 3rem;
-    animation: App-logo-pulse infinite 1.6s ease-in-out alternate;
+  :global(body) {
+    margin: 0;
+    background-color: black;
   }
-  @keyframes App-logo-pulse {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(1.06);
-    }
+
+  .hero {
+    background: url('/code.jpg') no-repeat;
+    background-size: cover;
+    color: white;
+    top: 0 !important;
+    padding-top: 10em;
+  }
+
+  .center {
+    text-align: center;
+    height: 100vh;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+  }
+
+  .bottom {
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+  }
+  h1 {
+    font-size: 5em;
+  }
+
+  article {
+    color: white;
+    padding: 1rem;
   }
 </style>
 
-<div class="App">
-  <header class="App-header">
-    <img src="/logo.svg" class="App-logo" alt="logo" />
-    <p>Edit <code>src/App.svelte</code> and save to reload.</p>
-    <p>Page has been open for <code>{count}</code> seconds.</p>
-    <p>
-      <a class="App-link" href="https://svelte.dev" target="_blank" rel="noopener noreferrer">
-        Learn Svelte
-      </a>
-    </p>
-  </header>
+<div class="scroll">
+  <article class="hidden">
+    HTML은 언어가 아닙니다!!
+  </article>
+  <section class="hero">
+    <div class="center">
+      <h1>개발자 MBTI</h1><br/>
+      <h2>당신이 어떤 성향의 개발자인지 알아봅시다.</h2>
+      <a class="btn btn-primary" href="#question">시작하기</a>
+      
+    </div>
+    
+  </section>
+
+  <section id="question">
+    <Question question="잔디 관리를 즐긴다"/>
+  </section>
 </div>
